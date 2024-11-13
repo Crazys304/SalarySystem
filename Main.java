@@ -15,9 +15,69 @@ public class Main {
         }
     }
 
-    private static final int MAX_EMPLOYEES = 200;
+    private static final int MAX_EMPLOYEES = 100;
     private static Employee[] employees = new Employee[MAX_EMPLOYEES];
     private static int employeesCount = 0;
+
+    protected static void addFullTime(String firstname, String lastname, String socialNumber, String contractType, double salary) {
+        if (employeesCount < MAX_EMPLOYEES) {
+            String position = "Full Time Employee";
+            employees[employeesCount++] = new FullTime(firstname, lastname, socialNumber, contractType, salary, position);
+            System.out.println("Full Time Employee successfully added.");
+        } else {
+            System.out.println("Employees are already full.");
+        }
+    }
+
+    protected static void addPartTime(String firstname, String lastname, String socialnumber, String contractType,double hourlyRate, int hoursWorked) {
+        if (employeesCount < MAX_EMPLOYEES) {
+            String position = "Part Time Employee";
+            employees[employeesCount++] = new PartTime(firstname, lastname, socialnumber, contractType, position, hourlyRate, hoursWorked);
+            System.out.println("Part Time Employee successfully added.");
+        } else {
+            System.out.println("Employees are already full.");
+        }
+    }
+
+    protected static void addCommission(String firstname, String lastname, String socialNumber, String contractType, double commissionRate, int sales) {
+        if (employeesCount < MAX_EMPLOYEES) {
+            String position = "Commission Employee";
+            employees[employeesCount++] = new Commission(firstname, lastname, socialNumber, contractType, position, commissionRate, sales);
+            System.out.println("Commission Employee successfully added.");
+        } else {
+            System.out.println("Employees are already full.");
+        }
+    }
+
+    protected static void addBaseCommission(String firstname, String lastname, String socialNumber, String contractType, double baseSalary, double commissionRate, int sales) {
+        if (employeesCount < MAX_EMPLOYEES) {
+            String position = "Base Employee with Commission";
+            employees[employeesCount++] = new BaseCommission(firstname, lastname, socialNumber, contractType, position, baseSalary, commissionRate, sales);
+            System.out.println("Base Commission Employee successfully added.");
+        } else {
+            System.out.println("Employees are already full.");
+        }
+    }
+
+    protected static void PrintByData() {
+        if (employeesCount == 0) {
+            System.out.println(
+                    "====================================\n" +
+                    "|      No Employees added.         |\n" +
+                    "====================================\n"
+            );
+            return;
+        }
+
+        System.out.println(
+                "====================================\n" +
+                "|      Employee Position           |\n" +
+                "===================================="
+        );
+        for (int i = 0; i < employeesCount; i++) {
+            System.out.print(employees[i].getEmployeeData());
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -63,13 +123,13 @@ public class Main {
                             String socialNumber = obj.nextLine();
                             System.out.println("Enter contract type: ");
                             String contractType = obj.nextLine();
-                            System.out.println("Enter salary: ");
+                            System.out.println("Enter base salary: ");
                             double salary = obj.nextDouble();
                             obj.nextLine();
-                            employees[employeesCount] = new FullTime(firstname, lastname, socialNumber, contractType);
-                            employeesCount++;
-                            System.out.println("Full time employee added successfully!");
-                        }if (num == 2) {
+
+                            addFullTime(firstname, lastname, socialNumber, contractType, salary);
+
+                        } else if (num == 2) {
                             System.out.println("Enter name: ");
                             String firstname = obj.nextLine();
                             System.out.println("Enter last name: ");
@@ -84,10 +144,10 @@ public class Main {
                             System.out.println("Enter hours worked: ");
                             int hoursWorked = obj.nextInt();
                             obj.nextLine();
-                            employees[employeesCount] = new PartTime(firstname, lastname, socialNumber, contractType, hourlyRate, hoursWorked);
-                            employeesCount++;
-                            System.out.println("Part-time employee added successfully!");
-                        } if (num == 3) {
+
+                                addPartTime(firstname, lastname, socialNumber, contractType, hourlyRate, hoursWorked);
+
+                        } else if (num == 3) {
                             System.out.println("Enter name: ");
                             String firstname = obj.nextLine();
                             System.out.println("Enter last name: ");
@@ -99,13 +159,13 @@ public class Main {
                             System.out.println("Enter commission rate: ");
                             double commissionRate = obj.nextDouble();
                             obj.nextLine();
-                            System.out.println("Enter sales: ");
+                            System.out.println("Enter number of sales: ");
                             int sales = obj.nextInt();
                             obj.nextLine();
-                            employees[employeesCount] = new Commission(firstname, lastname, socialNumber, contractType, commissionRate, sales);
-                            employeesCount++;
-                            System.out.println("Commission employee added successfully!");
-                        } if (num == 4) {
+
+                                addCommission(firstname, lastname, socialNumber, contractType, commissionRate, sales);
+
+                        } else if (num == 4) {
                             System.out.println("Enter name: ");
                             String firstname = obj.nextLine();
                             System.out.println("Enter last name: ");
@@ -123,11 +183,11 @@ public class Main {
                             System.out.println("Enter sales: ");
                             int sales = obj.nextInt();
                             obj.nextLine();
-                            employees[employeesCount] = new BaseCommission(firstname, lastname, socialNumber, contractType, baseSalary, commissionRate, sales);
-                            employeesCount++;
-                            System.out.println("Base Commission employee added successfully!");
-                        } if (num == 5) {
-                            System.out.println("Back to menu");
+
+                                addBaseCommission(firstname, lastname, socialNumber, contractType, baseSalary, commissionRate, sales);
+
+                        } else if (num == 5) {
+                            System.out.println("Return to menu");
                             break;
                         }
                         
@@ -137,6 +197,8 @@ public class Main {
                     }
                 } if (number == 2) {
 
+                    PrintByData();
+
                 } if (number == 3) {
 
                 } if (number == 4) {
@@ -145,6 +207,7 @@ public class Main {
                 System.out.println("Thank you have a great day! \nExiting...");
                 obj.close();
                 System.exit(0); // Exits the program
+
             }
             //}
         }
