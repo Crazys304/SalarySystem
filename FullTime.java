@@ -1,6 +1,6 @@
-class fulltime extends employee{
+class FullTime extends Employee {
     double salary;
-    public fulltime(String firstname, String lastname, String socialNumber, String contactType) {
+    public FullTime(String firstname, String lastname, String socialNumber, String contactType) {
         super(firstname, lastname, socialNumber, contactType);
     }
 
