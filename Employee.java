@@ -2,13 +2,13 @@ abstract class Employee {
     private String firstname;
     private String lastname;
     private String socialNumber;
-    private String contactType;
+    private String contractType;
 
-    public Employee(String firstname, String lastname, String socialNumber, String contactType) {
+    public Employee(String firstname, String lastname, String socialNumber, String contractType) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.socialNumber = socialNumber;
-        this.contactType = contactType;
+        this.contractType = contractType;
     }
 
     public abstract double income();
@@ -25,7 +25,7 @@ abstract class Employee {
         return socialNumber;
     }
 
-    public String getContactType() {
-        return contactType;
+    public String getContractType() {
+        return contractType;
     }
 }

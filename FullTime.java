@@ -1,7 +1,7 @@
 class FullTime extends Employee {
     double salary;
-    public FullTime(String firstname, String lastname, String socialNumber, String contactType) {
-        super(firstname, lastname, socialNumber, contactType);
+    public FullTime(String firstname, String lastname, String socialNumber, String contractType) {
+        super(firstname, lastname, socialNumber, contractType);
     }
 
     @Override
