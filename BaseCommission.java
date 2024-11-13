@@ -12,6 +12,6 @@ class BaseCommission extends Employee {
 
     @Override
     public double income() {
-        return baseSalary + (commissionRate * sales);
+        return baseSalary + (commissionRate * sales) + (baseSalary * 0.10);
     }
 }
