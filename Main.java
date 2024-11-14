@@ -8,25 +8,25 @@ class InvalidInputException extends Exception {
     }
 }
 
-class InvalidSubInputException extends Exception {
+class InvalidSubInputException extends Exception { // Custom exception for sub menu input
     public InvalidSubInputException(int number) {
         super("Invalid option. Input numbers between 1 and 4. \n");
     }
 }
 
-class NumberNegativeException extends Exception {
+class NumberNegativeException extends Exception { // Custom exception for negative number input
     public NumberNegativeException(double num) {
         super("The salary cannot be negative. \n");
     }
 }
 
-class NegativeHourException extends Exception {
+class NegativeHourException extends Exception { // Custom exception for negative hours
     public NegativeHourException(int hour) {
         super("An employee cannot have negative hours or sales. \n");
     }
 }
 
-class DuplicateEmployeeException extends Exception {
+class DuplicateEmployeeException extends Exception { // Custom exception for duplicate employees
     public DuplicateEmployeeException(String message) {
         super(message);
     }
@@ -39,28 +39,28 @@ public class Main {
             throw new InvalidInputException(number);
         }
     }
-
+    // Checks if the sub menu input is between the right numbers
     public static void InputSubException(int number) throws InvalidSubInputException {
         if (number < 1 || number > 5) {
             throw new InvalidSubInputException(number);
         }
     }
-
+    // Checks if number is not negative
     public static void NumberNegativeException(double num) throws NumberNegativeException {
         if (num < 0) {
             throw new NumberNegativeException(num);
         }
     }
-
+    // Checks if hour number is not negative
     public static void NegativeHourException(int hour) throws NegativeHourException {
         if (hour < 0) {
             throw new NegativeHourException(hour);
         }
     }
 
-    private static final int MAX_EMPLOYEES = 100;
+    private static final int MAX_EMPLOYEES = 100; // Max employee count
     private static Employee[] employees = new Employee[MAX_EMPLOYEES];
-    private static int employeesCount = 0;
+    private static int employeesCount = 0; // Employee count at start
 
 
     public static void main(String[] args) {
@@ -85,7 +85,7 @@ public class Main {
 
                 if (number == 1) {
                     try {
-                        while (true) {
+                        while (true) { // Prints employee submenu
                             System.out.println(
                                     "-----------------------------------" +
                                             "\n|1. Full time employee            |" +
@@ -106,13 +106,24 @@ public class Main {
                                     String lastname = obj.nextLine();
                                     System.out.println("Enter social number: ");
                                     String socialNumber = obj.nextLine();
-                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$");
-                                    if (!isValid) {
+                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$"); // Checks if Social number matches the pattern
+                                    if (!isValid) { // If not valid, prints message and breaks loop
                                         System.out.println("Invalid social number.");
+                                        break;
+                                    }
+                                    String[] parts = socialNumber.split("-"); // Splits number at -
+                                    String firstPart = parts[0];
+
+                                    int day = Integer.parseInt(firstPart.substring(0, 2)); // Day numbers
+                                    int month = Integer.parseInt(firstPart.substring(2, 4)); // Month numbers
+
+                                    if (day > 31 || day <= 0 || month > 12 || month <=0) { // Checks if numbers are correct
+                                        System.out.println("Invalid social number: Day or month out of range.");
                                         break;
                                     }
                                     System.out.println("Enter contract type (Seasonal or Annual): ");
                                     String contractType = obj.nextLine();
+                                    // Checks if contract type is as needed
                                     if (!contractType.equals("Seasonal") && !contractType.equals("Annual")) {
                                         System.out.println("Invalid contract type.");
                                         break;
@@ -138,9 +149,19 @@ public class Main {
                                     String lastname = obj.nextLine();
                                     System.out.println("Enter social number: ");
                                     String socialNumber = obj.nextLine();
-                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$");
-                                    if (!isValid) {
+                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$"); // Checks if Social number matches the pattern
+                                    if (!isValid) { // If not valid, prints message and breaks loop
                                         System.out.println("Invalid social number.");
+                                        break;
+                                    }
+                                    String[] parts = socialNumber.split("-"); // Splits number at -
+                                    String firstPart = parts[0];
+
+                                    int day = Integer.parseInt(firstPart.substring(0, 2)); // Day numbers
+                                    int month = Integer.parseInt(firstPart.substring(2, 4)); // Month numbers
+
+                                    if (day > 31 || day <= 0 || month > 12 || month <=0) { // Checks if numbers are correct
+                                        System.out.println("Invalid social number: Day or month out of range.");
                                         break;
                                     }
                                     System.out.println("Enter contract type (Seasonal or Annual): ");
@@ -174,9 +195,19 @@ public class Main {
                                     String lastname = obj.nextLine();
                                     System.out.println("Enter social number: ");
                                     String socialNumber = obj.nextLine();
-                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$");
-                                    if (!isValid) {
+                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$"); // Checks if Social number matches the pattern
+                                    if (!isValid) { // If not valid, prints message and breaks loop
                                         System.out.println("Invalid social number.");
+                                        break;
+                                    }
+                                    String[] parts = socialNumber.split("-"); // Splits number at -
+                                    String firstPart = parts[0];
+
+                                    int day = Integer.parseInt(firstPart.substring(0, 2)); // Day numbers
+                                    int month = Integer.parseInt(firstPart.substring(2, 4)); // Month numbers
+
+                                    if (day > 31 || day <= 0 || month > 12 || month <=0) { // Checks if numbers are correct
+                                        System.out.println("Invalid social number: Day or month out of range.");
                                         break;
                                     }
                                     System.out.println("Enter contract type (Seasonal or Annual): ");
@@ -209,9 +240,19 @@ public class Main {
                                     String lastname = obj.nextLine();
                                     System.out.println("Enter social number: ");
                                     String socialNumber = obj.nextLine();
-                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$");
-                                    if (!isValid) {
+                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$"); // Checks if Social number matches the pattern
+                                    if (!isValid) { // If not valid, prints message and breaks loop
                                         System.out.println("Invalid social number.");
+                                        break;
+                                    }
+                                    String[] parts = socialNumber.split("-"); // Splits number at -
+                                    String firstPart = parts[0];
+
+                                    int day = Integer.parseInt(firstPart.substring(0, 2)); // Day numbers
+                                    int month = Integer.parseInt(firstPart.substring(2, 4)); // Month numbers
+
+                                    if (day > 31 || day <= 0 || month > 12 || month <=0) { // Checks if numbers are correct
+                                        System.out.println("Invalid social number: Day or month out of range.");
                                         break;
                                     }
                                     System.out.println("Enter contract type (Seasonal or Annual): ");
@@ -223,7 +264,7 @@ public class Main {
                                     System.out.println("Enter base salary: ");
                                     double baseSalary = obj.nextDouble();
                                     obj.nextLine();
-                                    System.out.println("Enter commission rate: ");
+                                    System.out.println("Enter commission rate per sale: ");
                                     double commissionRate = obj.nextDouble();
                                     obj.nextLine();
                                     System.out.println("Enter sales: ");
