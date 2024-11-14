@@ -29,8 +29,16 @@ abstract class Employee {
         return socialNumber;
     }
 
+    public String getContract() {
+        return contractType;
+    }
+
     public String getContractType() {
         return contractType;
+    }
+
+    public String getPositionType() {
+        return Position;
     }
 
     public String getPosition() {

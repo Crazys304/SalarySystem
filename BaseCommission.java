@@ -20,11 +20,21 @@ class BaseCommission extends Employee {
         return
                 "Name: " + getFirstname() + " " + getLastname() + "\n" +
                 "Position: " + getPosition() + "\n" +
-                "Base Salary: " + baseSalary + "Euro\n" +
-                "Commission per Sale: " + commissionRate + "Euro\n" +
+                "Base Salary: " + baseSalary + " Euro\n" +
+                "Commission per Sale: " + commissionRate + " Euro\n" +
                 "Bonus: 10%\n" +
-                "Salary: " + income() + "Euro\n" +
+                "Salary: " + income() + " Euro\n" +
                 "Social Number: " + getSocialNumber() + "\n" +
+                "====================================\n";
+    }
+    @Override
+    public String getPositionType() {
+        return getFirstname() + " " + getLastname() + " - " + getPosition()+ "\n" +
+                "====================================\n";
+    }
+    @Override
+    public String getContractType() {
+        return getFirstname() + " " + getLastname() + " - " + getContract() + "\n" +
                 "====================================\n";
     }
 }

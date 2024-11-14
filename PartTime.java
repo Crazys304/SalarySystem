@@ -19,8 +19,18 @@ class PartTime extends Employee {
                 "Name: " + getFirstname() + " " + getLastname() + "\n" +
                 "Position: " + getPosition()+ "\n" +
                 "Number of hours worked: " + hoursWorked + "\n" +
-                "Salary: " + income() + "Euro\n" +
+                "Salary: " + income() + " Euro\n" +
                 "Social Number: " + getSocialNumber() + "\n" +
+                "====================================\n";
+    }
+    @Override
+    public String getPositionType() {
+        return getFirstname() + " " + getLastname() + " - " + getPosition()+ "\n" +
+                "====================================\n";
+    }
+    @Override
+    public String getContractType() {
+        return getFirstname() + " " + getLastname() + " - " + getContract() + "\n" +
                 "====================================\n";
     }
 }
