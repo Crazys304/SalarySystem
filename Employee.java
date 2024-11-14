@@ -14,7 +14,8 @@ abstract class Employee {
     }
 
     public abstract String getEmployeeData();
-
+    public abstract String getPositionType();
+    public abstract String getContractType();
     public abstract double income();
 
     public String getFirstname() {
@@ -31,14 +32,6 @@ abstract class Employee {
 
     public String getContract() {
         return contractType;
-    }
-
-    public String getContractType() {
-        return contractType;
-    }
-
-    public String getPositionType() {
-        return Position;
     }
 
     public String getPosition() {

@@ -1,13 +1,9 @@
-class BaseCommission extends Employee {
+class BaseCommission extends Commission {
     private double baseSalary;
-    private double commissionRate;
-    private int sales;
-
+    
     public BaseCommission(String firstname, String lastname, String socialNumber, String contractType, String position,double baseSalary, double commissionRate, int sales) {
-        super(firstname, lastname, socialNumber, contractType, position);
+        super(firstname, lastname, socialNumber, contractType, position, commissionRate, sales);
         this.baseSalary = baseSalary;
-        this.commissionRate = commissionRate;
-        this.sales = sales;
     }
 
     @Override

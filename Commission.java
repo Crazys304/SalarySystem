@@ -1,6 +1,6 @@
 class Commission extends Employee {
-    private double commissionRate;
-    private int sales;
+    protected double commissionRate;
+    protected int sales;
 
     public Commission(String firstname, String lastname, String socialNumber, String contractType, String position,double commissionRate, int sales) {
         super(firstname, lastname, socialNumber, contractType, position);
