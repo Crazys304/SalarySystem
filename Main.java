@@ -4,14 +4,14 @@ import java.util.Scanner;
 // Creates a custom exception used for menu input detection
 class InvalidInputException extends Exception {
     public InvalidInputException(int number) {
-        super("Invalid option. Input numbers between 1 and 5. \n"); // message for
+        super("Invalid option. Input numbers between 1 and 6. \n"); // message for
     }
 }
 
 public class Main {
     // Checks if the menu input is between the right numbers
     public static void InputException(int number) throws InvalidInputException {
-        if (number < 1 || number > 5) {
+        if (number < 1 || number > 6) {
             throw new InvalidInputException(number);
         }
     }
@@ -35,9 +35,10 @@ public class Main {
                                 "\n|2. Print employee data |" +
                                 "\n|3. Print by position   |" +
                                 "\n|4. Print by contract   |" +
-                                "\n|5. Exit                |" +
+                                "\n|5. Fire Employee       |" +
+                                "\n|6. Exit                |" +
                                 "\n-------------------------" +
-                                "\nEnter command (1 to 5): "
+                                "\nEnter command (1 to 6): "
                 );
                 int number = obj.nextInt();
                 obj.nextLine();
@@ -144,10 +145,14 @@ public class Main {
                                 System.out.println("Return to menu");
                                 break;
                             } else {
-                                System.out.println("Invalid option. Input numbers between 1 and 5. \n");
+                                try {
+                                    InputException(num);
+                                } catch (InvalidInputException e) {
+                                    System.out.println(e.getMessage());
+                                }
                             }
                         }
-                    }catch (InputMismatchException e) {
+                    } catch (InputMismatchException e) {
                         System.out.println("Invalid input.");
                     }
                 }
@@ -161,6 +166,9 @@ public class Main {
                     PrintByContract();
                 }
                 if (number == 5) {
+                    fireEmployee(obj);
+                }
+                if (number == 6) {
                     System.out.println("Thank you have a great day! \nExiting...");
                     obj.close();
                     System.exit(0); // Exits the program
@@ -221,15 +229,16 @@ public class Main {
     protected static void PrintByData() {
         if (employeesCount == 0) {
             System.out.println(
-                            "====================================\n" +
-                            "|      No Employees added.         |\n" +
-                            "====================================\n"
+                            "============================================\n" +
+                            "|         No Employees added.              |\n" +
+                            "============================================"
             );
             return;
-        }System.out.println(
-                "====================================\n" +
-                        "|      Employee Information        |\n" +
-                        "===================================="
+        }
+        System.out.println(
+                "============================================\n" +
+                        "|         Employee Information             |\n" +
+                        "============================================"
         );
         for (int i = 0; i < employeesCount; i++) {
             System.out.print(employees[i].getEmployeeData());
@@ -238,15 +247,16 @@ public class Main {
     protected static void PrintByPosition() {
         if (employeesCount == 0) {
             System.out.println(
-                    "====================================\n" +
-                            "|      No Employees added.         |\n" +
-                            "====================================\n"
+                    "============================================\n" +
+                            "|         No Employees added.              |\n" +
+                            "============================================"
             );
             return;
-        }System.out.println(
-                "====================================\n" +
-                        "|      Employee Position           |\n" +
-                        "===================================="
+        }
+        System.out.println(
+                "============================================\n" +
+                        "|         Employee Position                |\n" +
+                        "============================================"
         );
         for (int i = 0; i < employeesCount; i++) {
             System.out.print(employees[i].getPositionType());
@@ -255,18 +265,54 @@ public class Main {
     protected static void PrintByContract() {
         if (employeesCount == 0) {
             System.out.println(
-                    "====================================\n" +
-                            "|      No Employees added.         |\n" +
-                            "====================================\n"
+                    "============================================\n" +
+                            "|         No Employees added.              |\n" +
+                            "============================================"
             );
             return;
-        }System.out.println(
-                "====================================\n" +
-                        "|      Employee Position           |\n" +
-                        "===================================="
+        }
+        System.out.println(
+                "============================================\n" +
+                        "|         Employee Position                |\n" +
+                        "============================================"
         );
         for (int i = 0; i < employeesCount; i++) {
             System.out.print(employees[i].getContractType());
+        }
+    }
+
+    protected static void fireEmployee(Scanner obj) {
+        if (employeesCount == 0) {
+            System.out.println(
+                    "============================================\n" +
+                    "|      No employees to fire... Bummer      |\n" +
+                    "============================================"
+            );
+            return;
+        }
+
+        System.out.println("============================================");
+
+        int identification = 0;
+        for (int i = 0; i < employeesCount; i++) {
+            identification++;
+            System.out.println(
+                    identification + ". " + employees[i].getPositionType()
+            );
+        }
+        System.out.println("Enter which employee to delete: ");
+        int deleteId = obj.nextInt() - 1;
+        obj.nextLine();
+
+        if (deleteId >= 0 && deleteId < employeesCount) {
+            for (int i = deleteId; i < employeesCount - 1; i++) {
+                employees[i] = employees[i + 1];
+            }
+            employees[employeesCount - 1] = null;
+            employeesCount--;
+            System.out.println("Employee successfully Fired.");
+        } else {
+            System.out.println("Invalid Employee input.");
         }
     }
 }

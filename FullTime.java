@@ -17,16 +17,16 @@ class FullTime extends Employee {
                 "Base Salary: " + income() + " Euro\n" +
                 "Salary: " + income() + " Euro\n" +
                 "Social Number: " + getSocialNumber() + "\n" +
-                "====================================\n";
+                "============================================\n";
     }
     @Override
     public String getPositionType() {
         return getFirstname() + " " + getLastname() + " - " + getPosition()+ "\n" +
-                "====================================\n";
+                "============================================\n";
     }
     @Override
     public String getContractType() {
         return getFirstname() + " " + getLastname() + " - " + getContract() + "\n" +
-                "====================================\n";
+                "============================================\n";
     }
 }
