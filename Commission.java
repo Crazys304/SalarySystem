@@ -20,7 +20,7 @@ class Commission extends Employee {
                 "Number of Sales: " + sales + "\n" +
                 "Commission: " + commissionRate + " Euro\n" +
                 "Salary: " + income() + " Euro\n" +
-                "Social Number:" + getSocialNumber() + "\n" +
+                "Social Number: " + getSocialNumber() + "\n" +
                 "============================================\n";
     }
     @Override

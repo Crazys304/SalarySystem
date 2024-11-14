@@ -4,14 +4,14 @@ import java.util.Scanner;
 // Creates a custom exception used for menu input detection
 class InvalidInputException extends Exception {
     public InvalidInputException(int number) {
-        super("Invalid option. Input numbers between 1 and 6. \n"); // message for
+        super("Invalid option. Input numbers between 1 and 4. \n"); // message for
     }
 }
 
 public class Main {
     // Checks if the menu input is between the right numbers
     public static void InputException(int number) throws InvalidInputException {
-        if (number < 1 || number > 6) {
+        if (number < 1 || number > 4) {
             throw new InvalidInputException(number);
         }
     }
@@ -32,13 +32,11 @@ public class Main {
                                 "\n| Salary system         |" +
                                 "\n-------------------------" +
                                 "\n|1. Register employee   |" +
-                                "\n|2. Print employee data |" +
-                                "\n|3. Print by position   |" +
-                                "\n|4. Print by contract   |" +
-                                "\n|5. Fire Employee       |" +
-                                "\n|6. Exit                |" +
+                                "\n|2. Print options       |" +
+                                "\n|3. Fire Employee       |" +
+                                "\n|4. Exit                |" +
                                 "\n-------------------------" +
-                                "\nEnter command (1 to 6): "
+                                "\nEnter command (1 to 4): "
                 );
                 int number = obj.nextInt();
                 obj.nextLine();
@@ -66,8 +64,17 @@ public class Main {
                                     String lastname = obj.nextLine();
                                     System.out.println("Enter social number: ");
                                     String socialNumber = obj.nextLine();
+                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$");
+                                    if (!isValid) {
+                                        System.out.println("Invalid social number.");
+                                        break;
+                                    }
                                     System.out.println("Enter contract type (Seasonal or Annual): ");
                                     String contractType = obj.nextLine();
+                                    if (!contractType.equals("Seasonal") && !contractType.equals("Annual")) {
+                                        System.out.println("Invalid contract type.");
+                                        break;
+                                    }
                                     System.out.println("Enter base salary: ");
                                     double salary = obj.nextDouble();
                                     obj.nextLine();
@@ -85,8 +92,17 @@ public class Main {
                                     String lastname = obj.nextLine();
                                     System.out.println("Enter social number: ");
                                     String socialNumber = obj.nextLine();
+                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$");
+                                    if (!isValid) {
+                                        System.out.println("Invalid social number.");
+                                        break;
+                                    }
                                     System.out.println("Enter contract type (Seasonal or Annual): ");
                                     String contractType = obj.nextLine();
+                                    if (!contractType.equals("Seasonal") && !contractType.equals("Annual")) {
+                                        System.out.println("Invalid contract type.");
+                                        break;
+                                    }
                                     System.out.println("Enter hourly rate: ");
                                     double hourlyRate = obj.nextDouble();
                                     obj.nextLine();
@@ -106,8 +122,17 @@ public class Main {
                                     String lastname = obj.nextLine();
                                     System.out.println("Enter social number: ");
                                     String socialNumber = obj.nextLine();
+                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$");
+                                    if (!isValid) {
+                                        System.out.println("Invalid social number.");
+                                        break;
+                                    }
                                     System.out.println("Enter contract type (Seasonal or Annual): ");
                                     String contractType = obj.nextLine();
+                                    if (!contractType.equals("Seasonal") && !contractType.equals("Annual")) {
+                                        System.out.println("Invalid contract type.");
+                                        break;
+                                    }
                                     System.out.println("Enter commission rate (Euro): ");
                                     double commissionRate = obj.nextDouble();
                                     obj.nextLine();
@@ -126,8 +151,17 @@ public class Main {
                                     String lastname = obj.nextLine();
                                     System.out.println("Enter social number: ");
                                     String socialNumber = obj.nextLine();
+                                    boolean isValid = socialNumber.matches("^\\d{6}-\\d{5}$");
+                                    if (!isValid) {
+                                        System.out.println("Invalid social number.");
+                                        break;
+                                    }
                                     System.out.println("Enter contract type (Seasonal or Annual): ");
                                     String contractType = obj.nextLine();
+                                    if (!contractType.equals("Seasonal") && !contractType.equals("Annual")) {
+                                        System.out.println("Invalid contract type.");
+                                        break;
+                                    }
                                     System.out.println("Enter base salary: ");
                                     double baseSalary = obj.nextDouble();
                                     obj.nextLine();
@@ -157,18 +191,38 @@ public class Main {
                     }
                 }
                 if (number == 2) {
-                    PrintByData();
-                }
-                if (number == 3) {
-                    PrintByPosition();
-                }
-                if (number == 4) {
-                    PrintByContract();
-                }
-                if (number == 5) {
+                    try{
+                        while (true) {
+                            System.out.println(
+                                    "------------------------------" +
+                                            "\n|1. Print employees          |" +
+                                            "\n|2. Print by position        |" +
+                                            "\n|3. Print by contract        |" +
+                                            "\n|4. Back                     |" +
+                                            "\n------------------------------" +
+                                            "\nEnter command (1 to 4): "
+                            );
+                            int nums = obj.nextInt();
+                            obj.nextLine();
+                            if (nums == 1) {
+                                PrintByData();
+                            } if (nums == 2){
+                                PrintByPosition();
+                            } if (nums == 3) {
+                                PrintByContract();
+                            } if (nums == 4) {
+                                System.out.println("Return to menu");
+                                break;
+                            }
+                        }
+                    }catch (InputMismatchException e) {
+                        System.out.println("Invalid input.");
+                    }
+
+                }if (number == 3) {
                     fireEmployee(obj);
-                }
-                if (number == 6) {
+
+                }if (number == 4) {
                     System.out.println("Thank you have a great day! \nExiting...");
                     obj.close();
                     System.exit(0); // Exits the program
