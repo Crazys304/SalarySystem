@@ -8,11 +8,47 @@ class InvalidInputException extends Exception {
     }
 }
 
+class InvalidSubInputException extends Exception {
+    public InvalidSubInputException(int number) {
+        super("Invalid option. Input numbers between 1 and 4. \n");
+    }
+}
+
+class NumberNegativeException extends Exception {
+    public NumberNegativeException(double num) {
+        super("The salary cannot be negative. \n");
+    }
+}
+
+class NegativeHourException extends Exception {
+    public NegativeHourException(int hour) {
+        super("An employee cannot have negative hours or sales. \n");
+    }
+}
+
 public class Main {
     // Checks if the menu input is between the right numbers
     public static void InputException(int number) throws InvalidInputException {
         if (number < 1 || number > 4) {
             throw new InvalidInputException(number);
+        }
+    }
+
+    public static void InputSubException(int number) throws InvalidSubInputException {
+        if (number < 1 || number > 5) {
+            throw new InvalidSubInputException(number);
+        }
+    }
+
+    public static void NumberNegativeException(double num) throws NumberNegativeException {
+        if (num < 0) {
+            throw new NumberNegativeException(num);
+        }
+    }
+
+    public static void NegativeHourException(int hour) throws NegativeHourException {
+        if (hour < 0) {
+            throw new NegativeHourException(hour);
         }
     }
 
@@ -79,7 +115,11 @@ public class Main {
                                     double salary = obj.nextDouble();
                                     obj.nextLine();
 
+                                    NumberNegativeException(salary);
+
                                     addFullTime(firstname, lastname, socialNumber, contractType, salary);
+                                } catch (NumberNegativeException e) {
+                                    System.out.println(e.getMessage());
                                 } catch (InputMismatchException e) {
                                     System.out.println("Invalid input.");
                                 }
@@ -110,7 +150,13 @@ public class Main {
                                     int hoursWorked = obj.nextInt();
                                     obj.nextLine();
 
+                                    NumberNegativeException(hourlyRate);
+                                    NegativeHourException(hoursWorked);
+
                                     addPartTime(firstname, lastname, socialNumber, contractType, hourlyRate, hoursWorked);
+
+                                } catch (NegativeHourException | NumberNegativeException e) {
+                                    System.out.println(e.getMessage());
                                 } catch (InputMismatchException e) {
                                     System.out.println("Invalid input.");
                                 }
@@ -139,7 +185,13 @@ public class Main {
                                     System.out.println("Enter number of sales: ");
                                     int sales = obj.nextInt();
                                     obj.nextLine();
+
+                                    NegativeHourException(sales);
+                                    NumberNegativeException(commissionRate);
+
                                     addCommission(firstname, lastname, socialNumber, contractType, commissionRate, sales);
+                                } catch (NegativeHourException | NumberNegativeException e) {
+                                    System.out.println(e.getMessage());
                                 } catch (InputMismatchException e) {
                                     System.out.println("Invalid input.");
                                 }
@@ -171,7 +223,14 @@ public class Main {
                                     System.out.println("Enter sales: ");
                                     int sales = obj.nextInt();
                                     obj.nextLine();
+
+                                    NegativeHourException(sales);
+                                    NumberNegativeException(baseSalary);
+                                    NumberNegativeException(commissionRate);
+
                                     addBaseCommission(firstname, lastname, socialNumber, contractType, baseSalary, commissionRate, sales);
+                                } catch (NegativeHourException | NumberNegativeException e) {
+                                    System.out.println(e.getMessage());
                                 } catch (InputMismatchException e) {
                                     System.out.println("Invalid input.");
                                 }
@@ -180,8 +239,8 @@ public class Main {
                                 break;
                             } else {
                                 try {
-                                    InputException(num);
-                                } catch (InvalidInputException e) {
+                                    InputSubException(num);
+                                } catch (InvalidSubInputException e) {
                                     System.out.println(e.getMessage());
                                 }
                             }
@@ -213,6 +272,12 @@ public class Main {
                             } if (nums == 4) {
                                 System.out.println("Return to menu");
                                 break;
+                            } else {
+                                try {
+                                    InputException(nums);
+                                } catch (InvalidInputException e) {
+                                    System.out.println(e.getMessage());
+                                }
                             }
                         }
                     }catch (InputMismatchException e) {
