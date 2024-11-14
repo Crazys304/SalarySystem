@@ -12,15 +12,14 @@ class Commission extends Employee {
     public double income() {
         return commissionRate * sales;
     }
+
     @Override
-    public String getEmployeeData() {
-        return
-                "Name: " + getFirstname() + getLastname() + "\n" +
-                "Position: " + getPosition() + "\n" +
-                "Number of Sales: " + sales + "\n" +
-                "Commission: " + commissionRate + " Euro\n" +
-                "Salary: " + income() + " Euro\n" +
-                "Social Number: " + getSocialNumber() + "\n" +
+    public String toString() {
+        return super.toString() +
+                    "Position: " + getPosition() + "\n" +
+                    "Number of Sales: " + sales + "\n" +
+                    "Commission: " + commissionRate + " Euro\n" +
+                    "Salary: " + income() + " Euro\n" +
                 "============================================\n";
     }
     @Override

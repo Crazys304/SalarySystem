@@ -360,7 +360,7 @@ public class Main {
                         "============================================"
         );
         for (int i = 0; i < employeesCount; i++) {
-            System.out.print(employees[i].getEmployeeData());
+            System.out.print(employees[i].toString());
         }
     }
     protected static void PrintByPosition() {

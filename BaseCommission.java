@@ -12,15 +12,13 @@ class BaseCommission extends Commission {
     }
 
     @Override
-    public String getEmployeeData() {
-        return
-                "Name: " + getFirstname() + " " + getLastname() + "\n" +
+    public String toString() {
+        return super.toString() +
                 "Position: " + getPosition() + "\n" +
                 "Base Salary: " + baseSalary + " Euro\n" +
                 "Commission per Sale: " + commissionRate + " Euro\n" +
                 "Bonus: 10%\n" +
                 "Salary: " + income() + " Euro\n" +
-                "Social Number: " + getSocialNumber() + "\n" +
                 "============================================\n";
     }
     @Override

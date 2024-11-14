@@ -12,8 +12,7 @@ abstract class Employee {
         this.contractType = contractType;
         this.Position = Position;
     }
-
-    public abstract String getEmployeeData();
+    
     public abstract String getPositionType();
     public abstract String getContractType();
     public abstract double income();
@@ -36,5 +35,10 @@ abstract class Employee {
 
     public String getPosition() {
         return Position;
+    }
+    @Override
+    public String toString() {
+        return "Name " + getFirstname() + " " + getLastname() + '\n' +
+                "Social number " + getSocialNumber() + '\n';
     }
 }

@@ -14,13 +14,11 @@ class PartTime extends Employee {
     }
 
     @Override
-    public String getEmployeeData() {
-        return
-                "Name: " + getFirstname() + " " + getLastname() + "\n" +
-                "Position: " + getPosition()+ "\n" +
+    public String toString() {
+        return super.toString() +
+                "Position: " + getPosition() + "\n" +
                 "Number of hours worked: " + hoursWorked + "\n" +
                 "Salary: " + income() + " Euro\n" +
-                "Social Number: " + getSocialNumber() + "\n" +
                 "============================================\n";
     }
     @Override

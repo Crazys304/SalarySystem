@@ -9,14 +9,13 @@ class FullTime extends Employee {
     public double income(){
         return salary;
     }
+
     @Override
-    public String getEmployeeData() {
-        return
-                "Name: " + getFirstname() + " " + getLastname() + "\n" +
+    public String toString() {
+        return super.toString() +
                 "Position: " + getPosition() + "\n" +
                 "Base Salary: " + income() + " Euro\n" +
                 "Salary: " + income() + " Euro\n" +
-                "Social Number: " + getSocialNumber() + "\n" +
                 "============================================\n";
     }
     @Override
