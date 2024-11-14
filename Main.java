@@ -26,6 +26,12 @@ class NegativeHourException extends Exception {
     }
 }
 
+class DuplicateEmployeeException extends Exception {
+    public DuplicateEmployeeException(String message) {
+        super(message);
+    }
+}
+
 public class Main {
     // Checks if the menu input is between the right numbers
     public static void InputException(int number) throws InvalidInputException {
@@ -298,50 +304,92 @@ public class Main {
                         System.out.println(e.getMessage()); // Print error message from exception
                     }
                 }
-            }catch (InputMismatchException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Invalid input.");
                 obj.nextLine();
             }
         }
     }
 
+    protected static boolean employeeExist(String socialNumber) {
+        for (int i = 0; i < socialNumber.length(); i++) {
+            if (employees[i] != null && employees[i].getSocialNumber().equals(socialNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     protected static void addFullTime(String firstname, String lastname, String socialNumber, String contractType, double salary) {
-        if (employeesCount < MAX_EMPLOYEES) {
-            String position = "Full Time Employee";
-            employees[employeesCount++] = new FullTime(firstname, lastname, socialNumber, contractType, salary, position);
-            System.out.println("Full Time Employee successfully added.");
-        } else {
-            System.out.println("Employees are already full.");
+        try {
+            if (employeeExist(socialNumber)) {
+                throw new DuplicateEmployeeException("An Employee with the social number " + socialNumber + " already exists");
+            }
+
+            if (employeesCount < MAX_EMPLOYEES) {
+                String position = "Full Time Employee";
+                employees[employeesCount++] = new FullTime(firstname, lastname, socialNumber, contractType, salary, position);
+                System.out.println("Full Time Employee successfully added.");
+            } else {
+                System.out.println("Employees are already full.");
+            }
+        } catch (DuplicateEmployeeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    protected static void addPartTime(String firstname, String lastname, String socialnumber, String contractType,double hourlyRate, int hoursWorked) {
-        if (employeesCount < MAX_EMPLOYEES) {
-            String position = "Part Time Employee";
-            employees[employeesCount++] = new PartTime(firstname, lastname, socialnumber, contractType, position, hourlyRate, hoursWorked);
-            System.out.println("Part Time Employee successfully added.");
-        } else {
-            System.out.println("Employees are already full.");
+    protected static void addPartTime(String firstname, String lastname, String socialNumber, String contractType,double hourlyRate, int hoursWorked) {
+        try {
+            if (employeeExist(socialNumber)) {
+                throw new DuplicateEmployeeException("An Employee with the social number " + socialNumber + " already exists");
+            }
+
+
+            if (employeesCount < MAX_EMPLOYEES) {
+                String position = "Part Time Employee";
+                employees[employeesCount++] = new PartTime(firstname, lastname, socialNumber, contractType, position, hourlyRate, hoursWorked);
+                System.out.println("Part Time Employee successfully added.");
+            } else {
+                System.out.println("Employees are already full.");
+            }
+        } catch (DuplicateEmployeeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     protected static void addCommission(String firstname, String lastname, String socialNumber, String contractType, double commissionRate, int sales) {
-        if (employeesCount < MAX_EMPLOYEES) {
-            String position = "Commission Employee";
-            employees[employeesCount++] = new Commission(firstname, lastname, socialNumber, contractType, position, commissionRate, sales);
-            System.out.println("Commission Employee successfully added.");
-        } else {
-            System.out.println("Employees are already full.");
+        try {
+            if (employeeExist(socialNumber)) {
+                throw new DuplicateEmployeeException("An Employee with the social number " + socialNumber + " already exists");
+            }
+
+            if (employeesCount < MAX_EMPLOYEES) {
+                String position = "Commission Employee";
+                employees[employeesCount++] = new Commission(firstname, lastname, socialNumber, contractType, position, commissionRate, sales);
+                System.out.println("Commission Employee successfully added.");
+            } else {
+                System.out.println("Employees are already full.");
+            }
+        } catch (DuplicateEmployeeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     protected static void addBaseCommission(String firstname, String lastname, String socialNumber, String contractType, double baseSalary, double commissionRate, int sales) {
-        if (employeesCount < MAX_EMPLOYEES) {
-            String position = "Base Employee with Commission";
-            employees[employeesCount++] = new BaseCommission(firstname, lastname, socialNumber, contractType, position, baseSalary, commissionRate, sales);
-            System.out.println("Base Commission Employee successfully added.");
-        } else {
-            System.out.println("Employees are already full.");
+        try {
+            if (employeeExist(socialNumber)) {
+                throw new DuplicateEmployeeException("An Employee with the social number " + socialNumber + " already exists");
+            }
+
+            if (employeesCount < MAX_EMPLOYEES) {
+                String position = "Base Employee with Commission";
+                employees[employeesCount++] = new BaseCommission(firstname, lastname, socialNumber, contractType, position, baseSalary, commissionRate, sales);
+                System.out.println("Base Commission Employee successfully added.");
+            } else {
+                System.out.println("Employees are already full.");
+            }
+        } catch (DuplicateEmployeeException e) {
+            System.out.println(e.getMessage());
         }
     }
 

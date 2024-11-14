@@ -38,7 +38,7 @@ abstract class Employee {
     }
     @Override
     public String toString() {
-        return "Name " + getFirstname() + " " + getLastname() + '\n' +
-                "Social number " + getSocialNumber() + '\n';
+        return "Name: " + getFirstname() + " " + getLastname() + '\n' +
+                "Social number: " + getSocialNumber() + '\n';
     }
 }
