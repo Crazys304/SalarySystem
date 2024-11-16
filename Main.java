@@ -59,8 +59,8 @@ public class Main {
     }
 
     private static final int MAX_EMPLOYEES = 100; // Max employee count
-    private static Employee[] employees = new Employee[MAX_EMPLOYEES];
-    private static int employeesCount = 0; // Employee count at start
+    private static Employee[] employees = new Employee[MAX_EMPLOYEES]; // Array to store employee objects
+    private static int employeesCount = 0; // Employee count
 
 
     public static void main(String[] args) {
@@ -132,13 +132,13 @@ public class Main {
                                     double salary = obj.nextDouble();
                                     obj.nextLine();
 
-                                    NumberNegativeException(salary);
-
+                                    NumberNegativeException(salary); // Validates salary
+                                    // Calls method to add full-time employee
                                     addFullTime(firstname, lastname, socialNumber, contractType, salary);
                                 } catch (NumberNegativeException e) {
                                     System.out.println(e.getMessage());
                                 } catch (InputMismatchException e) {
-                                    System.out.println("Invalid input.");
+                                    System.out.println("Invalid input."); // Handle input mismatch
                                 }
 
                             } else if (num == 2) {
@@ -177,15 +177,15 @@ public class Main {
                                     int hoursWorked = obj.nextInt();
                                     obj.nextLine();
 
-                                    NumberNegativeException(hourlyRate);
-                                    NegativeHourException(hoursWorked);
-
+                                    NumberNegativeException(hourlyRate); // Validates rate
+                                    NegativeHourException(hoursWorked); // Validates hours
+                                    // Call method to add part-time employee
                                     addPartTime(firstname, lastname, socialNumber, contractType, hourlyRate, hoursWorked);
 
                                 } catch (NegativeHourException | NumberNegativeException e) {
                                     System.out.println(e.getMessage());
                                 } catch (InputMismatchException e) {
-                                    System.out.println("Invalid input.");
+                                    System.out.println("Invalid input."); // Handle input mismatch
                                 }
                             } else if (num == 3) {
                                 try {
@@ -223,9 +223,9 @@ public class Main {
                                     int sales = obj.nextInt();
                                     obj.nextLine();
 
-                                    NegativeHourException(sales);
-                                    NumberNegativeException(commissionRate);
-
+                                    NegativeHourException(sales); // Validates sales
+                                    NumberNegativeException(commissionRate); // Validates rate
+                                    // Call method to add commission employee
                                     addCommission(firstname, lastname, socialNumber, contractType, commissionRate, sales);
                                 } catch (NegativeHourException | NumberNegativeException e) {
                                     System.out.println(e.getMessage());
@@ -271,10 +271,10 @@ public class Main {
                                     int sales = obj.nextInt();
                                     obj.nextLine();
 
-                                    NegativeHourException(sales);
-                                    NumberNegativeException(baseSalary);
-                                    NumberNegativeException(commissionRate);
-
+                                    NegativeHourException(sales); // Validates sales
+                                    NumberNegativeException(baseSalary); // Validates salary
+                                    NumberNegativeException(commissionRate); // Validates rate
+                                    // Call method to add base commission employee
                                     addBaseCommission(firstname, lastname, socialNumber, contractType, baseSalary, commissionRate, sales);
                                 } catch (NegativeHourException | NumberNegativeException e) {
                                     System.out.println(e.getMessage());
@@ -286,7 +286,7 @@ public class Main {
                                 break;
                             } else {
                                 try {
-                                    InputSubException(num);
+                                    InputSubException(num);  // Validates submenu input
                                 } catch (InvalidSubInputException e) {
                                     System.out.println(e.getMessage());
                                 }
@@ -299,7 +299,7 @@ public class Main {
                 if (number == 2) {
                     try{
                         while (true) {
-                            System.out.println(
+                            System.out.println( // Prints print option submenu
                                     "------------------------------" +
                                             "\n|1. Print employees          |" +
                                             "\n|2. Print by position        |" +
@@ -310,6 +310,7 @@ public class Main {
                             );
                             int nums = obj.nextInt();
                             obj.nextLine();
+                            // Different print options based on input
                             if (nums == 1) {
                                 PrintByData();
                             } if (nums == 2){
@@ -321,7 +322,7 @@ public class Main {
                                 break;
                             } else {
                                 try {
-                                    InputException(nums);
+                                    InputException(nums); // Validates input
                                 } catch (InvalidInputException e) {
                                     System.out.println(e.getMessage());
                                 }
@@ -332,7 +333,7 @@ public class Main {
                     }
 
                 }if (number == 3) {
-                    fireEmployee(obj);
+                    fireEmployee(obj); // Calls method to fire employee
 
                 }if (number == 4) {
                     System.out.println("Thank you have a great day! \nExiting...");
@@ -352,58 +353,56 @@ public class Main {
         }
     }
 
+    // Method which checks if an employee with the given social number already exists in the employees array
     protected static boolean employeeExist(String socialNumber) {
         for (int i = 0; i < socialNumber.length(); i++) {
+            // Checks if social number matches
             if (employees[i] != null && employees[i].getSocialNumber().equals(socialNumber)) {
                 return true;
             }
         }
         return false;
     }
-
+    // Method for adding a new Full-Time Employee to the system
     protected static void addFullTime(String firstname, String lastname, String socialNumber, String contractType, double salary) {
         try {
-            if (employeeExist(socialNumber)) {
+            if (employeeExist(socialNumber)) { // Checks if an employee already exists
                 throw new DuplicateEmployeeException("An Employee with the social number " + socialNumber + " already exists");
             }
-
-            if (employeesCount < MAX_EMPLOYEES) {
+            if (employeesCount < MAX_EMPLOYEES) { // Checks if there is a room to add a new employee
                 String position = "Full Time Employee";
-                employees[employeesCount++] = new FullTime(firstname, lastname, socialNumber, contractType, salary, position);
+                employees[employeesCount++] = new FullTime(firstname, lastname, socialNumber, contractType, salary, position); // Add employee
                 System.out.println("Full Time Employee successfully added.");
             } else {
                 System.out.println("Employees are already full.");
             }
         } catch (DuplicateEmployeeException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()); // Print duplicate employee error message
         }
     }
-
+    // Method for adding a new Part-Time Employee to the system
     protected static void addPartTime(String firstname, String lastname, String socialNumber, String contractType,double hourlyRate, int hoursWorked) {
         try {
-            if (employeeExist(socialNumber)) {
+            if (employeeExist(socialNumber)) { // Checks if an employee already exists
                 throw new DuplicateEmployeeException("An Employee with the social number " + socialNumber + " already exists");
             }
-
-
-            if (employeesCount < MAX_EMPLOYEES) {
+            if (employeesCount < MAX_EMPLOYEES) { // Checks if there is a room to add a new employee
                 String position = "Part Time Employee";
-                employees[employeesCount++] = new PartTime(firstname, lastname, socialNumber, contractType, position, hourlyRate, hoursWorked);
+                employees[employeesCount++] = new PartTime(firstname, lastname, socialNumber, contractType, position, hourlyRate, hoursWorked); // Add employee
                 System.out.println("Part Time Employee successfully added.");
             } else {
                 System.out.println("Employees are already full.");
             }
         } catch (DuplicateEmployeeException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()); // Print duplicate employee error message
         }
     }
-
+    // Method for adding a new Commission employee
     protected static void addCommission(String firstname, String lastname, String socialNumber, String contractType, double commissionRate, int sales) {
         try {
             if (employeeExist(socialNumber)) {
                 throw new DuplicateEmployeeException("An Employee with the social number " + socialNumber + " already exists");
             }
-
             if (employeesCount < MAX_EMPLOYEES) {
                 String position = "Commission Employee";
                 employees[employeesCount++] = new Commission(firstname, lastname, socialNumber, contractType, position, commissionRate, sales);
@@ -415,13 +414,12 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
-
+    // Method for adding a new Base commission employee
     protected static void addBaseCommission(String firstname, String lastname, String socialNumber, String contractType, double baseSalary, double commissionRate, int sales) {
         try {
             if (employeeExist(socialNumber)) {
                 throw new DuplicateEmployeeException("An Employee with the social number " + socialNumber + " already exists");
             }
-
             if (employeesCount < MAX_EMPLOYEES) {
                 String position = "Base Employee with Commission";
                 employees[employeesCount++] = new BaseCommission(firstname, lastname, socialNumber, contractType, position, baseSalary, commissionRate, sales);
@@ -433,9 +431,9 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
-
+    // Prints details of all employees in the system
     protected static void PrintByData() {
-        if (employeesCount == 0) {
+        if (employeesCount == 0) { // Checks if there are no employees
             System.out.println(
                             "============================================\n" +
                             "|         No Employees added.              |\n" +
@@ -448,10 +446,12 @@ public class Main {
                         "|         Employee Information             |\n" +
                         "============================================"
         );
+        // Loops through employees and prints details from each class
         for (int i = 0; i < employeesCount; i++) {
             System.out.print(employees[i].toString());
         }
     }
+    // Prints position of all employees in the system
     protected static void PrintByPosition() {
         if (employeesCount == 0) {
             System.out.println(
@@ -466,10 +466,12 @@ public class Main {
                         "|         Employee Position                |\n" +
                         "============================================"
         );
+        // Loops through employees and prints positions details from each class
         for (int i = 0; i < employeesCount; i++) {
             System.out.print(employees[i].getPositionType());
         }
     }
+    // Prints contracts of all employees in the system
     protected static void PrintByContract() {
         if (employeesCount == 0) {
             System.out.println(
@@ -484,11 +486,12 @@ public class Main {
                         "|         Employee Position                |\n" +
                         "============================================"
         );
+        // Loops through employees and prints contract details from each class
         for (int i = 0; i < employeesCount; i++) {
             System.out.print(employees[i].getContractType());
         }
     }
-
+    // Method to fire an employees
     protected static void fireEmployee(Scanner obj) {
         if (employeesCount == 0) {
             System.out.println(
@@ -498,29 +501,28 @@ public class Main {
             );
             return;
         }
-
         System.out.println("============================================");
 
-        int identification = 0;
-        for (int i = 0; i < employeesCount; i++) {
+        int identification = 0; // Variable to display employee numbering
+        for (int i = 0; i < employeesCount; i++) { // Display all employees with numbering
             identification++;
             System.out.println(
                     identification + ". " + employees[i].getPositionType()
             );
         }
         System.out.println("Enter which employee to delete: ");
-        int deleteId = obj.nextInt() - 1;
+        int deleteId = obj.nextInt() - 1; // Subtracts 1 for zero-based indexing
         obj.nextLine();
 
-        if (deleteId >= 0 && deleteId < employeesCount) {
-            for (int i = deleteId; i < employeesCount - 1; i++) {
+        if (deleteId >= 0 && deleteId < employeesCount) { // Validates range
+            for (int i = deleteId; i < employeesCount - 1; i++) { // Shifts employees in the array to fill the gap
                 employees[i] = employees[i + 1];
             }
-            employees[employeesCount - 1] = null;
-            employeesCount--;
+            employees[employeesCount - 1] = null; // Nullify the last entry
+            employeesCount--; // Decreases employee count
             System.out.println("Employee successfully Fired.");
         } else {
-            System.out.println("Invalid Employee input.");
+            System.out.println("Invalid Employee input."); // Invalid index entered
         }
     }
 }
