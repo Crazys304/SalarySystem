@@ -1,10 +1,11 @@
 abstract class Employee {
-    private String firstname;
-    private String lastname;
-    private String socialNumber;
-    private String contractType;
-    private String Position;
+    private String firstname; // first name for the employee
+    private String lastname; // last name for the employee
+    private String socialNumber; // employees social number
+    private String contractType; // employees contract time
+    private String Position; // employees job position
 
+    // A Constructor to initialize employee attributes
     public Employee(String firstname, String lastname, String socialNumber, String contractType, String Position) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -13,10 +14,11 @@ abstract class Employee {
         this.Position = Position;
     }
     
-    public abstract String getPositionType();
-    public abstract String getContractType();
-    public abstract double income();
+    public abstract String getPositionType(); // Abstract method to get employees position
+    public abstract String getContractType(); // Abstract method to get employees contract
+    public abstract double income(); // Abstract method to get employees income
 
+    // ----------- Getters
     public String getFirstname() {
         return firstname;
     }
@@ -36,6 +38,7 @@ abstract class Employee {
     public String getPosition() {
         return Position;
     }
+
     @Override
     public String toString() {
         return "Name: " + getFirstname() + " " + getLastname() + '\n' +
